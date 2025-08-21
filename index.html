@@ -2,55 +2,57 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8" />
-  <title>Dashboard (Embedded)</title>
+  <title>Dashboard (Embed)</title>
 
   <!-- สำคัญมากสำหรับมือถือ -->
   <meta name="viewport"
-        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+        content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, user-scalable=no">
+
+  <!-- ให้สีแถบเบราว์เซอร์กลืนพื้นหลัง ลดแถบเทาๆ ด้านบนใน iOS -->
+  <meta name="theme-color" content="#f5f7fb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
 
   <style>
-    /* รีเซ็ตขอบและทำให้สูงเต็มจอ */
-    html, body { height: 100%; margin: 0; padding: 0; }
-    body {
-      background: #f5f7fb;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      -webkit-text-size-adjust: 100%; /* กัน iOS ขยายฟอนต์เอง */
-      overscroll-behavior: contain;    /* กันเด้งซ้อน */
+    /* ปิด margin/padding/scroll ของหน้าห่อทั้งหมด */
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;         /* กันการเลื่อนที่หน้าห่อ */
+      background: #f5f7fb;      /* ให้สีพื้นตรงกับด้านใน */
+      -webkit-text-size-adjust: 100%;
     }
 
-    /* ใช้เลย์เอาต์แบบเต็มหน้าจอ รองรับรอยบาก (safe area) */
-    .fullscreen {
+    /* กล่องครอบแบบเต็มจอ รองรับรอยบาก */
+    .viewport {
       position: fixed;
-      inset: 0; /* top/right/bottom/left = 0 */
-      padding:
-        env(safe-area-inset-top)
-        env(safe-area-inset-right)
-        env(safe-area-inset-bottom)
-        env(safe-area-inset-left);
-      display: grid;
+      top: env(safe-area-inset-top);
+      left: env(safe-area-inset-left);
+      right: env(safe-area-inset-right);
+      bottom: env(safe-area-inset-bottom);
+      /* กันการเกิดช่องว่างจาก address bar ยุบ-ขยาย */
+      inset: 0;
     }
 
-    iframe {
+    /* Iframe เต็มจริงๆ แบบยึดขอบ */
+    .viewport > iframe {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
       width: 100%;
       height: 100%;
       border: 0;
       display: block;
-      /* รองรับค่าความสูงใหม่บนมือถือหลากหลายเบราว์เซอร์ */
-      height: 100dvh;
-      max-height: 100svh; /* iOS 16+ */
       background: #fff;
+      /* แก้ความสูงเพี้ยนระหว่างเบราว์เซอร์ */
+      height: 100dvh;
+      max-height: 100svh;
     }
+
+    /* กันการกระเด้ง/ยืดใน iOS */
+    body { overscroll-behavior: none; }
   </style>
 </head>
 <body>
-  <div class="fullscreen">
+  <div class="viewport">
     <iframe
-      src="https://script.google.com/macros/s/AKfycbxphi1h60vYBTigINIeqaR1ZTHXGjLw8gw-Sjk22p4vS-sEAst26Cl14aV35nz5YpRoeQ/exec"
-      allow="clipboard-read; clipboard-write"
-      referrerpolicy="no-referrer"
-      sandbox="allow-scripts allow-forms allow-same-origin allow-downloads">
-    </iframe>
-  </div>
-</body>
-</html>
+      src="https://script.google.com/macros/s/AKfycbxphi1h60vYBTigINIeqaR1ZTHXGjLw8gw-Sjk22p4vS-sEAst26Cl14aV35nz5
