@@ -1,23 +1,56 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>แจ้งงานสาธรณูปโภคTheBest ลำลูกกา คอลงหก</title>
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-      }
-      iframe {
-        width: 100%;
-        height: 100vh; /* เต็มหน้าจอ */
-        border: none;
-      }
-    </style>
-  </head>
-  <body>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard (Embedded)</title>
+
+  <!-- สำคัญมากสำหรับมือถือ -->
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+
+  <style>
+    /* รีเซ็ตขอบและทำให้สูงเต็มจอ */
+    html, body { height: 100%; margin: 0; padding: 0; }
+    body {
+      background: #f5f7fb;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-text-size-adjust: 100%; /* กัน iOS ขยายฟอนต์เอง */
+      overscroll-behavior: contain;    /* กันเด้งซ้อน */
+    }
+
+    /* ใช้เลย์เอาต์แบบเต็มหน้าจอ รองรับรอยบาก (safe area) */
+    .fullscreen {
+      position: fixed;
+      inset: 0; /* top/right/bottom/left = 0 */
+      padding:
+        env(safe-area-inset-top)
+        env(safe-area-inset-right)
+        env(safe-area-inset-bottom)
+        env(safe-area-inset-left);
+      display: grid;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+      /* รองรับค่าความสูงใหม่บนมือถือหลากหลายเบราว์เซอร์ */
+      height: 100dvh;
+      max-height: 100svh; /* iOS 16+ */
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="fullscreen">
     <iframe
-      src="https://script.google.com/macros/s/AKfycbxphi1h60vYBTigINIeqaR1ZTHXGjLw8gw-Sjk22p4vS-sEAst26Cl14aV35nz5YpRoeQ/exec">
+      src="https://script.google.com/macros/s/AKfycbxphi1h60vYBTigINIeqaR1ZTHXGjLw8gw-Sjk22p4vS-sEAst26Cl14aV35nz5YpRoeQ/exec"
+      allow="clipboard-read; clipboard-write"
+      referrerpolicy="no-referrer"
+      sandbox="allow-scripts allow-forms allow-same-origin allow-downloads">
     </iframe>
-  </body>
+  </div>
+</body>
 </html>
